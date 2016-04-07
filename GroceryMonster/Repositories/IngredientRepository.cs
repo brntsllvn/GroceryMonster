@@ -6,9 +6,9 @@ namespace GroceryMonster.Repositories
 {
     public class IngredientRepository : IRepository<Ingredient>
     {
-        private IngredientDbContext _db;
+        private GroceryMonsterDb _db;
 
-        public IngredientRepository(IngredientDbContext db)
+        public IngredientRepository(GroceryMonsterDb db)
         {
             _db = db;
         }

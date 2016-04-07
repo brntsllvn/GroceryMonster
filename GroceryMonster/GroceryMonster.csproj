@@ -157,11 +157,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\IngredientController.cs" />
+    <Compile Include="DbContexts\IGroceryMonsterDb.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Entities\Ingredient.cs" />
-    <Compile Include="DbContexts\IngredientDbContext.cs" />
+    <Compile Include="DbContexts\GroceryMonsterDb.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IngredientRepository.cs" />

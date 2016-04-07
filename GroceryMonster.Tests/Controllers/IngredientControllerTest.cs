@@ -1,10 +1,13 @@
-﻿using GroceryMonster.Controllers;
+﻿using System.Collections;
+using GroceryMonster.Controllers;
 using GroceryMonster.DbContexts;
 using GroceryMonster.Entities;
 using GroceryMonster.Repositories;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
+using GroceryMonster.Tests.Fakes;
 
 namespace GroceryMonster.Tests.Controllers
 {
@@ -28,16 +31,18 @@ namespace GroceryMonster.Tests.Controllers
         public void DetailPassesInstanceOfIngredientToView()
         {
             // Arrange
-            var ingredientContext = new IngredientDbContext();
-            var ingredientRepository = new IngredientRepository(ingredientContext);
-            var ingredientController = new IngredientController(ingredientRepository);
-            var ingredient = new Ingredient { Id = 42, Name = "Spinach" };
+            var db = new FakeGroceryMonsterDb();
+            db.AddSet(TestData.Ingredients);
+
+            var ingredientController = new IngredientController(db);
+            //ingredientController.ControllerContext = new FakeControllerContext();
 
             // Assert
             var result = ingredientController.Detail(42) as ViewResult;
+            IEnumerable<Ingredient> model = result.Model as IEnumerable<Ingredient>;
 
             // Act
-            Assert.That(result.Model.Equals(ingredient));
+            Assert.AreEqual(1, model.Count());
         }
     }
 }

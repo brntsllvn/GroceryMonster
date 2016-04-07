@@ -1,27 +1,30 @@
-﻿using GroceryMonster.DbContexts;
+﻿using System.Linq;
+using GroceryMonster.DbContexts;
 using GroceryMonster.Repositories;
 using System.Web.Mvc;
+using GroceryMonster.Entities;
 
 namespace GroceryMonster.Controllers
 {
     public class IngredientController : Controller
     {
-        private IngredientRepository _ingredientRepository;
+        IGroceryMonsterDb _db;
 
-        public IngredientController(IngredientRepository ingredientRepository)
+        public IngredientController()
         {
-            _ingredientRepository = ingredientRepository;    
+            _db = new GroceryMonsterDb();
         }
 
-        public ActionResult Index()
+        public IngredientController(IGroceryMonsterDb db)
         {
-            return View("Index");
+            _db = db;
         }
 
         public ActionResult Detail(int ingredientId)
         {
-            var ingredient = _ingredientRepository.Get(ingredientId); 
-            return View(ingredient);
+            var model = _db.Query<Ingredient>()
+                           .Where(i => i.Id == ingredientId);
+            return View(model);
         }
     }
 }
