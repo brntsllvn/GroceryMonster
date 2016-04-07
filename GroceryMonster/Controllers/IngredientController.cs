@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using GroceryMonster.DbContexts;
-using GroceryMonster.Repositories;
 using System.Web.Mvc;
 using GroceryMonster.Entities;
 

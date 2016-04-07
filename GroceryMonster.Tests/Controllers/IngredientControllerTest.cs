@@ -28,6 +28,17 @@ namespace GroceryMonster.Tests.Controllers
         //}
 
         [Test]
+        public void DetailReturnsNotNull()
+        {
+            var ingredientController = new IngredientController();
+
+            var result = ingredientController.Detail(42) as ViewResult;
+            var model = result.Model;
+
+            Assert.That(model, Is.Not.Null);
+        }
+
+        [Test]
         public void DetailPassesInstanceOfIngredientToView()
         {
             // Arrange
